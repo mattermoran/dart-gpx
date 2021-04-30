@@ -66,7 +66,8 @@ class GpxWriter {
 
           if (metadata.author!.email != null) {
             builder.element(GpxTagV11.email, nest: () {
-              _writeAttribute(builder, GpxTagV11.id, metadata.author!.email!.id);
+              _writeAttribute(
+                  builder, GpxTagV11.id, metadata.author!.email!.id);
               _writeAttribute(
                   builder, GpxTagV11.domain, metadata.author!.email!.domain);
             });
@@ -78,10 +79,12 @@ class GpxWriter {
 
       if (metadata.copyright != null) {
         builder.element(GpxTagV11.copyright, nest: () {
-          _writeAttribute(builder, GpxTagV11.author, metadata.copyright!.author);
+          _writeAttribute(
+              builder, GpxTagV11.author, metadata.copyright!.author);
 
           _writeElement(builder, GpxTagV11.year, metadata.copyright!.year);
-          _writeElement(builder, GpxTagV11.license, metadata.copyright!.license);
+          _writeElement(
+              builder, GpxTagV11.license, metadata.copyright!.license);
         });
       }
 
@@ -222,7 +225,7 @@ class GpxWriter {
     }
   }
 
-  void _writeAttribute(XmlBuilder builder, String tagName, value) {
+  void _writeAttribute(XmlBuilder builder, String tagName, Object value) {
     if (value != null) {
       builder.attribute(tagName, value);
     }
