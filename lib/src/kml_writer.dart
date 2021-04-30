@@ -27,7 +27,7 @@ class KmlWriter {
 
       builder.element(KmlTagV22.document, nest: () {
         if (gpx.metadata != null) {
-          _writeMetadata(builder, gpx.metadata);
+          _writeMetadata(builder, gpx.metadata!);
         }
 
         if (gpx.wpts != null) {
@@ -59,11 +59,11 @@ class KmlWriter {
 
     if (metadata.author != null) {
       builder.element('atom:author', nest: () {
-        _writeElement(builder, 'atom:name', metadata.author.name);
+        _writeElement(builder, 'atom:name', metadata.author!.name);
         _writeElement(builder, 'atom:email',
-            '${metadata.author.email.id}@${metadata.author.email.domain}');
+            '${metadata.author!.email!.id}@${metadata.author!.email!.domain}');
 
-        _writeElement(builder, 'atom:uri', metadata.author.link.href);
+        _writeElement(builder, 'atom:uri', metadata.author!.link!.href);
       });
     }
 
@@ -72,12 +72,12 @@ class KmlWriter {
 
       if (metadata.time != null) {
         _writeExtendedElement(
-            builder, GpxTagV11.time, metadata.time.toIso8601String());
+            builder, GpxTagV11.time, metadata.time!.toIso8601String());
       }
 
       if (metadata.copyright != null) {
         _writeExtendedElement(builder, GpxTagV11.copyright,
-            '${metadata.copyright.author}, ${metadata.copyright.year}');
+            '${metadata.copyright!.author}, ${metadata.copyright!.year}');
       }
     });
   }
@@ -206,7 +206,7 @@ class KmlWriter {
     }
   }
 
-  void _writeElementWithTime(XmlBuilder builder, DateTime value) {
+  void _writeElementWithTime(XmlBuilder builder, DateTime? value) {
     if (value != null) {
       builder.element(KmlTagV22.timestamp, nest: () {
         builder.element(KmlTagV22.when, nest: value.toUtc().toIso8601String());
